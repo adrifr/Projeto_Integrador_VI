@@ -1,0 +1,154 @@
+/* Painel administrativo do Projeto Integrador.
+   Carregar depois dos estilos existentes. Usar <body class="painel-admin">.
+   Atua somente na apresentacao; abas e formularios continuam com o PHP atual. */
+body.painel-admin {
+  --azul: #2458c6;
+  --texto: #1e293b;
+  --borda: #e1e7ef;
+  margin: 0;
+  padding: 42px 40px 60px 284px;
+  background: #f3f6fb;
+  color: var(--texto);
+  font: 16px/1.6 "Segoe UI", Arial, sans-serif;
+  min-height: 100vh;
+}
+.painel-admin *, .painel-admin *::before, .painel-admin *::after { box-sizing: border-box; }
+.painel-admin > h2 {
+  margin: 0 0 28px;
+  font-size: clamp(24px, 3vw, 32px);
+  line-height: 1.25;
+  letter-spacing: -.8px;
+  font-weight: 700;
+}
+.painel-admin > nav {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: 244px;
+  padding: 36px 20px;
+  background: #14243e;
+  color: #fff;
+  overflow-y: auto;
+  z-index: 10;
+}
+.painel-admin > nav::before {
+  content: "PROJETO INTEGRADOR";
+  display: block;
+  margin: 0 12px 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #34435b;
+  color: #d7e6ff;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+}
+.painel-admin nav a {
+  display: block;
+  margin: 6px 0;
+  padding: 12px 14px;
+  border-radius: 9px;
+  color: #e4ebf7;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  transition: background .15s ease;
+}
+.painel-admin nav a:hover { background: #263c5d; color: white; }
+.painel-admin nav > div { margin: 30px 0 0 !important; text-align: left !important; }
+.painel-admin nav a[href*="logout"] {
+  background: #293c57 !important;
+  color: #fff !important;
+  padding: 12px 14px !important;
+}
+.painel-admin .aba {
+  display: none;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 28px;
+  border: 1px solid var(--borda);
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 6px 22px #20365a06;
+  overflow-x: auto;
+}
+.painel-admin .aba.ativa { display: block; }
+.painel-admin h3 { margin: 0 0 20px; font-size: 21px; letter-spacing: -.4px; }
+.painel-admin h4 { margin: 0 0 12px; font-size: 19px; }
+.painel-admin p { margin: 0 0 16px; overflow-wrap: anywhere; }
+.painel-admin label { display: inline-block; margin: 10px 0 6px; font-size: 14px; font-weight: 600; }
+.painel-admin input:not([type="hidden"]):not([type="submit"]):not([type="checkbox"]):not([type="radio"]),
+.painel-admin textarea, .painel-admin select {
+  width: 100%;
+  max-width: 780px;
+  padding: 12px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #fff;
+  color: var(--texto);
+  font: inherit;
+}
+.painel-admin textarea { min-height: 160px; resize: vertical; }
+.painel-admin input[type="file"] { background: #f8fafc !important; font-size: 14px !important; }
+.painel-admin input::file-selector-button {
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin-right: 12px;
+  background: white;
+  color: #334155;
+  cursor: pointer;
+}
+.painel-admin button, .painel-admin input[type="submit"] {
+  display: inline-block;
+  min-height: 44px;
+  padding: 10px 20px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: var(--azul);
+  color: white;
+  font: 600 14px/1.5 "Segoe UI", Arial, sans-serif;
+  cursor: pointer;
+}
+.painel-admin button:hover, .painel-admin input[type="submit"]:hover { filter: brightness(.93); }
+.painel-admin :is(a, button, input, textarea, select):focus-visible {
+  outline: 3px solid #60a5fa;
+  outline-offset: 3px;
+}
+.painel-admin #blog > form { padding-bottom: 28px; margin-bottom: 28px; border-bottom: 1px solid var(--borda); }
+.painel-admin #blog > div {
+  margin: 16px 0 !important;
+  padding: 22px !important;
+  border: 1px solid var(--borda) !important;
+  border-radius: 12px;
+  background: #fcfdff;
+}
+.painel-admin #blog > div p { max-width: 85ch; white-space: pre-wrap; }
+.painel-admin #blog img { display: block; width: auto; max-width: 100%; max-height: 280px; margin: 16px 0; border-radius: 8px; }
+.painel-admin form[action*="excluir"] button {
+  color: #b42334;
+  background: #fff1f2;
+  border-color: #fecdd3;
+}
+.painel-admin table { width: 100%; border-collapse: separate; border-spacing: 0; margin: 16px 0 28px; font-size: 14px; }
+.painel-admin th, .painel-admin td { padding: 14px 16px; text-align: left; border: 0; border-bottom: 1px solid var(--borda); overflow-wrap: anywhere; }
+.painel-admin th { background: #f1f5f9; color: #475569; font-weight: 600; }
+.painel-admin tbody tr:hover td { background: #f8fafc; }
+.painel-admin .aba a { color: #2458c6; text-underline-offset: 3px; }
+.painel-admin ul { padding-left: 24px; }
+@media (max-width: 900px) {
+  body.painel-admin { padding: 24px 20px 40px; }
+  .painel-admin > nav { position: static; width: auto; border-radius: 12px; padding: 14px; margin-bottom: 24px; display: flex; flex-wrap: wrap; gap: 4px; }
+  .painel-admin > nav::before { width: 100%; margin: 4px 10px 8px; padding-bottom: 12px; }
+  .painel-admin nav a { margin: 0; padding: 10px 12px; }
+  .painel-admin nav > div { margin: 0 !important; }
+  .painel-admin .aba { padding: 22px; }
+}
+@media (max-width: 540px) {
+  body.painel-admin { padding: 20px 12px 32px; }
+  .painel-admin > h2 { margin-bottom: 20px; }
+  .painel-admin .aba { padding: 18px 14px; border-radius: 12px; }
+  .painel-admin #blog > div { padding: 16px !important; }
+  .painel-admin table { min-width: 540px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .painel-admin * { transition: none !important; }
+}

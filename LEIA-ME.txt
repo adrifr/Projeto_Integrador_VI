@@ -1,0 +1,44 @@
+INSTALACAO - PRESENCA E TEMPERATURA
+
+1. Faca backup do index.php atual e do programa anterior do ESP8266.
+2. Copie o conteudo da pasta Projeto_Integrador deste pacote para
+   C:\xampp\htdocs\Projeto_Integrador\
+   Substitua somente index.php. Os outros tres arquivos sao novos.
+   Nao substitua conexao.php nem receber_dados.php.
+3. A tabela iot_dados existente e reutilizada. Nenhum SQL de migracao e necessario.
+   Temperatura usa tipo_sensor = Temperatura; presenca continua usando Presença.
+4. Inicie Apache e MySQL no XAMPP.
+5. Abra esp8266_igreja/esp8266_igreja.ino na IDE Arduino.
+   Preencha ssid e password. Confira IP 192.168.0.8 nos dois enderecos.
+   A chave ja e igual no firmware e no iot_config.php. Nao publique esses arquivos
+   com chave ou credenciais reais. Esta entrega e para a rede local.
+6. Selecione NodeMCU 1.0 (ESP-12E Module) e a porta COM correta.
+   Bibliotecas: DHT sensor library e Adafruit Unified Sensor, da Adafruit.
+7. Ligacao DHT22 (de frente, pinos para baixo): 1=3V3, 2=D2/GPIO4,
+   3=desconectado, 4=GND. Resistor de 10k entre pinos 1 e 2.
+   Presenca: sinal no D5/GPIO14, ativo em LOW, como no programa original.
+   Use USAR_PRESENCA=false se esse sensor estiver desconectado.
+8. Carregue o programa completo. Ele substitui o teste do DHT22.
+9. Monitor Serial: 115200 baud. Temperatura HTTP: 201 indica leitura gravada.
+   401: chaves diferentes; 404: caminho errado; 500: conferir banco/log do Apache;
+   numero negativo: conferir rede, IP, Apache e firewall para rede privada.
+10. Abra http://192.168.0.8/Projeto_Integrador/index.php e use Ctrl+F5.
+    O cartao fica acima dos posts. Atualiza aproximadamente a cada 10 segundos.
+    O ESP envia a cada 60 segundos. Apos 3 minutos sem leitura, o cartao avisa.
+
+TESTE DE ACEITACAO
+- Verifique leitura no Serial e HTTP 201.
+- Confira temperatura e horario no site (pode variar ate um minuto).
+- Acione uma vez o sensor de presenca e confira o painel Dados IoT.
+- Desligue o ESP e aguarde mais de 3 minutos: aviso de leitura desatualizada.
+- Religue e aguarde nova leitura: estado atualizado deve retornar.
+- Confira que login e posts continuam funcionando.
+
+LIMITES
+O contador representa deteccoes, nao ocupacao exata. A leitura de presenca
+usa consulta do pino no loop: durante chamadas HTTP e leitura do DHT pode
+perder pulsos rapidos. Nao ha fila persistente nem reenvio de presenca offline.
+O sensor DHT nao deve ficar encostado no ESP, sob sol ou junto a fonte de calor.
+A hora exibida e a do banco/servidor, sem alterar o fuso existente do projeto.
+O recebimento antigo de presenca e preservado, inclusive seu comportamento.
+Validacao real do circuito, do banco local e compilacao na IDE ainda necessarias.

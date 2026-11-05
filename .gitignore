@@ -1,0 +1,41 @@
+# Configurações e credenciais
+conexao.php
+iot_config.php
+.env
+.env.*
+!.env.example
+senha_usuarioadmin.txt
+
+# Banco de dados e cópias locais
+*.sql
+*.db
+igreja_db.txt
+/banco_de_dados_estrutura final/
+
+# Arquivos enviados por usuários
+uploads/
+
+# Dependências instaladas pelo Composer
+/vendor/
+
+# Firmware: revisar senhas antes de publicar
+/esp8266_igreja/
+/Nota2/
+/Nota2.cpp
+/Nota_C++/
+
+# Possível cópia do projeto dentro da pasta principal
+/Projeto_Integrador/
+
+# Script de criação de administrador: revisar antes de publicar
+/xxxcriar_admin.php
+
+# Arquivos temporários
+*.log
+*.bak
+*.zip
+
+# Arquivos locais adicionais
+/senha_usuarioeadmin.txt
+/Nota2
+/Nota_C++
